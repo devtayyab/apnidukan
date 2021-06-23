@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,7 +14,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import { Link } from 'react-router-dom';
+import {useDispatch,useSelector} from 'react-redux'
+import {searchaction} from '../../store/action/product'
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -74,16 +76,17 @@ const useStyles = makeStyles((theme) => ({
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
-      display: 'none',
+      display: 'none',    
     },
   },
 }));
 
 export default function PrimarySearchAppBar() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+const [search, setsearch] = useState();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -103,6 +106,10 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const handleSearch =()=>{
+    search.trim()
+    dispatch(searchaction(search))
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -131,14 +138,20 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+       
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+     
+        <IconButton aria-label="show 4 new mails" color="inherit" >
+         
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
+          
         </IconButton>
+        
         <p>Messages</p>
       </MenuItem>
+ 
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
@@ -173,22 +186,26 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
+          <Link to="/">
           <Typography className={classes.title} variant="h6" noWrap>
-            Material-UI
+            PRODUCTS
           </Typography>
+          </Link>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
+           
             <InputBase
               placeholder="Search…"
+              onChange={(e)=>setsearch(e.target.value)}
               classes={{
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
-          </div>
+            <IconButton onClick={handleSearch}>
+            <SearchIcon />
+              </IconButton>
+           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
@@ -212,6 +229,7 @@ export default function PrimarySearchAppBar() {
               <AccountCircle />
             </IconButton>
           </div>
+          <Link to="/add"><h4>SELL</h4></Link>
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
