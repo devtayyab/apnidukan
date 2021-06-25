@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'flex',
+     
     },
   },
   sectionMobile: {
@@ -78,15 +79,28 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       display: 'none',    
     },
+   
   },
+  links:{
+    marginRight: theme.spacing(3),
+    color: 'white'
+  }
 }));
 
-export default function PrimarySearchAppBar() {
+export default function Navbar() {
+
   const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const state = useSelector(state=> state)
 const [search, setsearch] = useState();
+const [user, setuser] =useState(JSON.parse(localStorage.getItem("user")))
+useEffect(() => {
+  setuser(user)
+}, [dispatch,state])
+console.log(user?.result)
+
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -102,7 +116,11 @@ const [search, setsearch] = useState();
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+const Logout =()=>{
 
+
+  
+}
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -122,8 +140,8 @@ const [search, setsearch] = useState();
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>{user?.result?.name}</MenuItem>
+      <MenuItem onClick={handleMenuClose, Logout}>logout</MenuItem>
     </Menu>
   );
 
@@ -142,24 +160,22 @@ const [search, setsearch] = useState();
       <MenuItem>
      
         <IconButton aria-label="show 4 new mails" color="inherit" >
-         
-          <Badge badgeContent={4} color="secondary">
-            <MailIcon />
-          </Badge>
-          
+         <Link to="/signup">
+        <p>Signup</p>
+        </Link>
         </IconButton>
         
-        <p>Messages</p>
+       
       </MenuItem>
  
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
+         <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Link to="/signin">
+          <p>Signin</p>
+          </Link>
+        </IconButton> 
+       
+     </MenuItem> 
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -169,7 +185,7 @@ const [search, setsearch] = useState();
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>{user?.result?.name}</p>
       </MenuItem>
     </Menu>
   );
@@ -188,7 +204,7 @@ const [search, setsearch] = useState();
           </IconButton>
           <Link to="/">
           <Typography className={classes.title} variant="h6" noWrap>
-            PRODUCTS
+            Dukkan
           </Typography>
           </Link>
           <div className={classes.search}>
@@ -206,18 +222,27 @@ const [search, setsearch] = useState();
             <SearchIcon />
               </IconButton>
            </div>
-          <div className={classes.grow} />
+           
+           <div className={classes.grow} />
+           
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            
+             
+                <Link to="/signup" >
+                <h3 className={classes.links}>Register</h3>
+                </Link>
+              
+          
+           
+              <Link to="/signin" >
+              <h3 className={classes.links}>Signin</h3>
+              </Link>
+              {user ?
+              
+              <Link to="/add">
+              <h4 className={classes.links}>SELL</h4>
+              </Link>: null }
+              {user ?
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -227,9 +252,14 @@ const [search, setsearch] = useState();
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+             </IconButton>
+
+             : null}
+           
+             
           </div>
-          <Link to="/add"><h4>SELL</h4></Link>
+          
+
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"

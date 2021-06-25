@@ -1,1 +1,1 @@
-export const uri = 'http://localhost:5000/product'
+export const uri = 'http://localhost:5000'

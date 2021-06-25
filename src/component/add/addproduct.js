@@ -41,7 +41,9 @@ e.preventDefault()
   />
 
 
-  </FormControl><FormControl className="controls">
+  </FormControl>
+  
+  <FormControl className="controls">
   <InputLabel htmlFor="my-iput">Catagory</InputLabel>
   <Input id="my-input" aria-describedby="my-helper-text"
   defultvalue={product.category} onChange={(e)=>setproduct({...product , category: e.target.value})}

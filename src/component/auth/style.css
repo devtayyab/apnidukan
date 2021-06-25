@@ -1,0 +1,16 @@
+.forms{
+        display: block;
+        width: 35%;
+        min-width: 25%;
+        box-shadow: 3px 10px 10px gray;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        padding: 5px;
+        margin: 5px;
+}
+.controls{
+
+    width: 90%;
+}
