@@ -2,43 +2,52 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import {searchaction} from '../../store/action/product'
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import {useDispatch} from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-      display:'contents',
-    width: '10%',
-    maxWidth: 360,
+    display: 'flex',
+   
+    // maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
 
   },
   List :{
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'space-around'
 
   }
 }));
 
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
 
 export default function SimpleList() {
+  const dispatch = useDispatch();
   const classes = useStyles();
+const tabsearch = (category)=>{
+dispatch(searchaction(category))
 
+}
   return (
     <div className={classes.root}>
-      <List aria-label="main mailbox folders" className='List'>
-        <ListItem button>
+      <List aria-label="main mailbox folders" className={classes.List}>
+        <ListItem button onClick={()=>tabsearch("electronics")}>
          
-          <ListItemText primary="Inbox" />
+          <ListItemText primary="Electronics" />
         </ListItem>
-        <ListItem button>
+        <ListItem button  onClick={()=>tabsearch("dress")}>
           
-          <ListItemText primary="Drafts" />
+          <ListItemText primary="Dress" />
+        </ListItem>
+        <ListItem button  onClick={()=>tabsearch("Grocery")}>
+          
+          <ListItemText primary="Grocery" />
+        </ListItem>
+        <ListItem button  onClick={()=>tabsearch("houses")}>
+          
+          <ListItemText primary="Houses" />
         </ListItem>
       </List>
       <Divider />

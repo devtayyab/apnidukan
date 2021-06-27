@@ -7,6 +7,8 @@ console.log(state)
         return state = action.payload
         case "SEARCH":
           return state = action.payload
+          case "DETAIL":
+            return  [action.payload]
     default: 
         return state
   }

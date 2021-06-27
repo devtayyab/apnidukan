@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import Navbar from './navbar/navbar'
 import Tabsearch from './navbar/searchtab'
-import  Cards  from './display/display'
+import  Listproducts from './display/listproducts'
 import {productget} from '../store/action/product'
 import Addproduct from './add/addproduct'
 import Signup from './auth/signup'
 import Signin from './auth/siginin'
+import Shipping from './shipping/shipping'
+import CartScreen from './cart/cart'
+import Detail from './SINGLEPOST/sdetail'
 import {useDispatch, useSelector} from 'react-redux'
 import {BrowserRouter , Route , Switch} from 'react-router-dom'
 export default function Home() {
@@ -29,9 +32,11 @@ useEffect(() => {
             
             <BrowserRouter>
             <Navbar ></Navbar>
-            <Tabsearch></Tabsearch>
+           
             <Route exact path="/">
-            {product.map((item)=><Cards key={item?._id} item={item}/>)}</Route>
+            <Tabsearch></Tabsearch>
+                <Listproducts/>
+                </Route>
            
             <Route path="/add">
             <Addproduct></Addproduct>
@@ -40,6 +45,10 @@ useEffect(() => {
                <Signup></Signup></Route>
                <Route path= '/signin'>
                <Signin></Signin></Route>
+               <Route path= '/product/:id'>
+               <Detail></Detail></Route>
+               <Route path='/cart/:id?' component={CartScreen} />
+               <Route path='/shipping/:id' component={Shipping} />
             </BrowserRouter>
         </div>
     )

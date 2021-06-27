@@ -32,3 +32,21 @@ export const Signupaction =(user)=>{
     
     })
     }
+export const logoutaction =()=>{
+    
+return (dispatch)=>{
+    try {
+        console.log("hnrHTjhkGHsdPUfZlqeOxciDB3c")
+        dispatch({
+            type: "LOGOUT"
+    
+        })
+    
+    
+    } catch (error) {
+        console.log(error)
+    }
+   
+}
+     }
+  

@@ -16,7 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import moment from 'moment'
-
+import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,7 +67,7 @@ export default function Cards({item}) {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+            T
           </Avatar>
         }
         action={
@@ -78,15 +78,19 @@ export default function Cards({item}) {
         title={item.category}
         subheader={moment(item.createdAt).fromNow()}
       />
+      <Link to={`/product/${item._id}`}>
       <CardMedia
         className={classes.media}
-        image="/static/images/cards/paella.jpg"
+        image={item?.image}
         title="Paella dish"
       />
+      </Link>
       <CardContent>
+      <Link to={`/product/${item._id}`}>
         <Typography variant="body2" color="textSecondary" component="p">
           {item.name}
         </Typography>
+        </Link>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">

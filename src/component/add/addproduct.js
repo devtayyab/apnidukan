@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react'
 import {FormControl, InputLabel,Input,FormHelperText, Button} from '@material-ui/core'
 import {productadd} from '../../store/action/product'
+import FileBase from 'react-file-base64'
 import {useDispatch} from 'react-redux'
 import './style.css'
 import {useHistory} from 'react-router-dom'
@@ -58,7 +59,8 @@ e.preventDefault()
   <Input id="my-input" aria-describedby="my-helper-text" 
   defultvalue={product.description} onChange={(e)=>setproduct({...product , description: e.target.value})}
   
-  /></FormControl><FormControl className="controls">
+  /></FormControl>
+  <FormControl className="controls">
  
   <InputLabel htmlFor="my-input">Rating</InputLabel>
   <Input id="my-input" aria-describedby="my-helper-text"
@@ -66,6 +68,19 @@ e.preventDefault()
   /></FormControl><FormControl className="controls">
   
 </FormControl>
+<FormControl className="controls">
+ 
+ <InputLabel htmlFor="my-input">countInStock</InputLabel>
+ <Input id="my-input" aria-describedby="my-helper-text"
+ defultvalue={product.countInStock} onChange={(e)=>setproduct({...product , countInStock: e.target.value})}
+ /></FormControl><FormControl className="controls">
+ 
+</FormControl>
+<FileBase
+        type= "file"
+        multiple = {false}
+        onDone= {({base64})=>setproduct({...product, image : base64 })}
+        ></FileBase>
 
 <Button type="submit" onClick={Handleform} variant="outlined" color="primary">ADD</Button>
 </form>

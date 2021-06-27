@@ -42,3 +42,19 @@ export const searchaction = (search)=>{
 
   
     }
+    export  const Detailaction = (id)=>{
+        console.log("action" + id)
+         return( async(dispatch)=>{
+ 
+             try {
+                 const {data} = await axios.post(`${uri}/product/${id}`, {id})
+                 dispatch({
+                     type: "DETAIL",
+                     payload : data
+                 })
+             } catch (error) {
+                 console.log(error.message)
+             }
+         })
+ 
+      }

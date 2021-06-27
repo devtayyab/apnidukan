@@ -5,18 +5,17 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
+import {Button} from '@material-ui/core'
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux'
 import {searchaction} from '../../store/action/product'
+import {logoutaction} from '../../store/action/useraction'
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -117,9 +116,9 @@ console.log(user?.result)
     handleMobileMenuClose();
   };
 const Logout =()=>{
+  console.log("logout")
+dispatch(logoutaction)
 
-
-  
 }
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -141,7 +140,9 @@ const Logout =()=>{
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>{user?.result?.name}</MenuItem>
-      <MenuItem onClick={handleMenuClose, Logout}>logout</MenuItem>
+      {/* <MenuItem onClick={()=>
+        handleMenuClose
+        }>logout</MenuItem> */}
     </Menu>
   );
 
@@ -158,16 +159,16 @@ const Logout =()=>{
     >
        
       <MenuItem>
-     
+     {!user ? 
         <IconButton aria-label="show 4 new mails" color="inherit" >
          <Link to="/signup">
         <p>Signup</p>
         </Link>
         </IconButton>
         
-       
+       : null }
       </MenuItem>
- 
+      {!user ?
       <MenuItem>
          <IconButton aria-label="show 11 new notifications" color="inherit">
           <Link to="/signin">
@@ -176,6 +177,24 @@ const Logout =()=>{
         </IconButton> 
        
      </MenuItem> 
+     :null }
+      <MenuItem>
+      {user ?
+              
+              <Link to="/add">
+              <h4>SELL</h4>
+              </Link>: null }
+              </MenuItem>
+              <MenuItem>
+      {user ?
+              <Button onClick={()=>Logout()}>
+
+              Logout
+              </Button>
+              
+              : null }
+              </MenuItem>
+     
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           aria-label="account of current user"
@@ -200,13 +219,13 @@ const Logout =()=>{
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
-          </IconButton>
-          <Link to="/">
+         <Link to="/">
           <Typography className={classes.title} variant="h6" noWrap>
             Dukkan
           </Typography>
           </Link>
+          </IconButton>
+         
           <div className={classes.search}>
            
             <InputBase
@@ -226,17 +245,18 @@ const Logout =()=>{
            <div className={classes.grow} />
            
           <div className={classes.sectionDesktop}>
-            
+            {!user ? 
              
                 <Link to="/signup" >
                 <h3 className={classes.links}>Register</h3>
                 </Link>
-              
+              :null }
           
-           
+           {!user  ? 
               <Link to="/signin" >
               <h3 className={classes.links}>Signin</h3>
               </Link>
+              :null }
               {user ?
               
               <Link to="/add">
