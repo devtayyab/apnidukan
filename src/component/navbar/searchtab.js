@@ -1,5 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Fade from 'react-reveal'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import {searchaction} from '../../store/action/product'
@@ -11,13 +12,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
    
-    // maxWidth: 360,
+    maxWidth: '100%',
     backgroundColor: theme.palette.background.paper,
 
   },
   List :{
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    maxWidth: '100%',
 
   }
 }));
@@ -33,6 +35,7 @@ dispatch(searchaction(category))
   return (
     <div className={classes.root}>
       <List aria-label="main mailbox folders" className={classes.List}>
+        <Fade top>
         <ListItem button onClick={()=>tabsearch("electronics")}>
          
           <ListItemText primary="Electronics" />
@@ -49,6 +52,7 @@ dispatch(searchaction(category))
           
           <ListItemText primary="Houses" />
         </ListItem>
+        </Fade>
       </List>
       <Divider />
          </div>

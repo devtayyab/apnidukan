@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
+import Zoom from 'react-reveal'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -62,14 +63,11 @@ export default function Cards({item}) {
   };
 
   return (
- 
+  
     <Card className={classes.root}>
+        <Zoom right>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            T
-          </Avatar>
-        }
+       
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />
@@ -79,11 +77,13 @@ export default function Cards({item}) {
         subheader={moment(item.createdAt).fromNow()}
       />
       <Link to={`/product/${item._id}`}>
+       
       <CardMedia
         className={classes.media}
         image={item?.image}
         title="Paella dish"
       />
+   
       </Link>
       <CardContent>
       <Link to={`/product/${item._id}`}>
@@ -110,8 +110,9 @@ export default function Cards({item}) {
           <ExpandMoreIcon />
         </IconButton>
       </CardActions>
-      
+      </Zoom>
     </Card>
+  
    
   );
 }

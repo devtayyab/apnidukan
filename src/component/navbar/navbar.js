@@ -15,6 +15,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import { Link } from 'react-router-dom';
 import {useDispatch,useSelector} from 'react-redux'
 import {searchaction} from '../../store/action/product'
+import Shake from 'react-reveal/Shake';
 import {logoutaction} from '../../store/action/useraction'
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -27,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+      textDecoration : 'none' ,
+      color: 'white'
     },
   },
   search: {
@@ -170,11 +173,13 @@ dispatch(logoutaction)
       </MenuItem>
       {!user ?
       <MenuItem>
+      
          <IconButton aria-label="show 11 new notifications" color="inherit">
           <Link to="/signin">
           <p>Signin</p>
           </Link>
         </IconButton> 
+        
        
      </MenuItem> 
      :null }
@@ -213,18 +218,13 @@ dispatch(logoutaction)
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-          >
+         
          <Link to="/">
           <Typography className={classes.title} variant="h6" noWrap>
             Dukkan
           </Typography>
           </Link>
-          </IconButton>
+          
          
           <div className={classes.search}>
            
@@ -253,9 +253,11 @@ dispatch(logoutaction)
               :null }
           
            {!user  ? 
+           <Shake>
               <Link to="/signin" >
               <h3 className={classes.links}>Signin</h3>
               </Link>
+              </Shake>
               :null }
               {user ?
               

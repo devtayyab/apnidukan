@@ -10,6 +10,7 @@ import Shipping from './shipping/shipping'
 import CartScreen from './cart/cart'
 import Detail from './SINGLEPOST/sdetail'
 import {useDispatch, useSelector} from 'react-redux'
+import Slider from './slider/slider'
 import {BrowserRouter , Route , Switch} from 'react-router-dom'
 export default function Home() {
 
@@ -28,13 +29,14 @@ useEffect(() => {
 
  
     return (
-        <div>
+        <div style ={{maxWidth: '100%', textAlign: "center"}}>
             
             <BrowserRouter>
             <Navbar ></Navbar>
            
             <Route exact path="/">
             <Tabsearch></Tabsearch>
+            <Slider></Slider>
                 <Listproducts/>
                 </Route>
            
