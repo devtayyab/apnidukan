@@ -9,6 +9,7 @@ import Signin from './auth/siginin'
 import Shipping from './shipping/shipping'
 import CartScreen from './cart/cart'
 import Detail from './SINGLEPOST/sdetail'
+import Footer from './footer/footer'
 import {useDispatch, useSelector} from 'react-redux'
 import Slider from './slider/slider'
 import {BrowserRouter , Route , Switch} from 'react-router-dom'
@@ -38,6 +39,7 @@ useEffect(() => {
             <Tabsearch></Tabsearch>
             <Slider></Slider>
                 <Listproducts/>
+                <Footer/>
                 </Route>
            
             <Route path="/add">

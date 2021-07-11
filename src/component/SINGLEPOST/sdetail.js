@@ -49,7 +49,7 @@ export default function Detail() {
 
         <Grid container className={classes.root} spacing={2}>
           <Grid item xs={4} className={classes.control}>
-            <img src={item?.image} alt="NO Image" />
+            <img src={item?.image} alt="NO Image"  style={{maxWidth: '400px'}}/>
 
           </Grid>
           <Grid item xs={4} sclassName={classes.control}>

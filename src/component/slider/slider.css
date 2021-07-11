@@ -2,7 +2,20 @@
 @media only screen and (max-width: 600px) {
 .img {
     height: 25px;
+    width: 100%;
+    align-self: center;
+    margin: auto;
+    border-radius: 10px 5px;
 }
+.coursel{
+
+    width: 100% !important ;
+    align-items: center;
+    display: space-around;
+      align-self: center;
+      margin: auto;
+    
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -10,23 +23,51 @@
 }
 .img {
     height: 300px;
+    align-self: center;
+    margin: auto;
+    border-radius: 10px;
 }
 
+.coursel{
+
+    width: 70% !important ;
+    align-items: center;
+    display: space-around;
+      align-self: center;
+      margin: auto;
+    
+    }
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .img {
         height: 400px;
-        width: 400px
+        width: 400px;
+        margin: auto;
+        align-self: center;
+        border-radius: 10px;
     }
+    .coursel{
+
+        width: 50% !important ;
+        align-items: center;
+        display: space-around;
+          align-self: center;
+          margin: auto;
+          box-shadow: 10px 5px 5px black;
+        }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .img {
         height: 400px;
-        width: 400px
+        width: 400px;
+        align-self: center;
+        margin: auto;
+        border-radius: 10px;
     }
-}
+    }
+
 
 .slider{
     display: space-around;
@@ -35,7 +76,14 @@
 
 .coursel{
 
-    width: 60%,
+width: 50% !important ;
+align-items: center;
+display: space-around;
+  align-self: center;
+  margin: auto;
+  box-shadow: 5px 5px 5px lightgray;
+  border-radius: 10px;
+
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 

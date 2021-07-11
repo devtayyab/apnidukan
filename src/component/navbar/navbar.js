@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
+import Flash from 'react-reveal/Flash';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -99,7 +100,7 @@ export default function Navbar() {
 const [search, setsearch] = useState();
 const [user, setuser] =useState(JSON.parse(localStorage.getItem("user")))
 useEffect(() => {
-  setuser(user)
+  setuser(JSON.parse(localStorage.getItem("user")))
 }, [dispatch,state])
 console.log(user?.result)
 
@@ -118,11 +119,8 @@ console.log(user?.result)
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-const Logout =()=>{
-  console.log("logout")
-dispatch(logoutaction)
+const Logout =()=>dispatch(logoutaction())
 
-}
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -151,6 +149,7 @@ dispatch(logoutaction)
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
+    <Flash>
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -183,22 +182,26 @@ dispatch(logoutaction)
        
      </MenuItem> 
      :null }
+        {user ?
       <MenuItem>
-      {user ?
+   
               
               <Link to="/add">
               <h4>SELL</h4>
-              </Link>: null }
+              </Link>
               </MenuItem>
+              : null }
+              {user ?
               <MenuItem>
-      {user ?
+      
+
               <Button onClick={()=>Logout()}>
 
               Logout
               </Button>
               
-              : null }
-              </MenuItem>
+            
+              </MenuItem>  : null }
      
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -212,6 +215,7 @@ dispatch(logoutaction)
         <p>{user?.result?.name}</p>
       </MenuItem>
     </Menu>
+    </Flash>
   );
 
   return (
@@ -262,8 +266,13 @@ dispatch(logoutaction)
               {user ?
               
               <Link to="/add">
-              <h4 className={classes.links}>SELL</h4>
+              <h5 className={classes.links}>SELL</h5>
               </Link>: null }
+              {user ?
+              
+              <Button onClick={()=>Logout()}>
+              <h4 className={classes.links}>Logout</h4>
+              </Button>: null }
               {user ?
             <IconButton
               edge="end"
